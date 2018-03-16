@@ -178,6 +178,6 @@ gcc -o ola_num_caracs_2 ola_num_caracs_2.o num_caracs.o
 ```  
 `Resposta em ola_num_caracs_2.c`
 
-12. Crie um Makefile para a questão anterior.
-`Resposta em Makefile-q12`
+12. Crie um Makefile para a questão anterior.  
+`Resposta em Makefile-q12`  
 `make -f Makefile-q12`
