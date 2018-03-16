@@ -3,7 +3,7 @@
 int main(void)
 {
 	char nome[128];
-	printf("Digite seu nome:\n");
+	printf("Digite seu nome: ");
 	scanf("%s", nome);
 	printf("Ola %s\n", nome);
 }
