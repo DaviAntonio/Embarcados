@@ -1,0 +1,11 @@
+busca_e_conta: bib_arqs.o busca_e_conta.o
+	gcc $(CFLAGS) -o busca_e_conta bib_arqs.o busca_e_conta.o
+
+bib_arqs.o: bib_arqs.c
+	gcc $(CFLAGS) -c bib_arqs.c
+
+busca_e_conta.o: bib_arqs.h busca_e_conta.c
+	gcc $(CFLAGS) -c busca_e_conta.c
+
+clean:
+	rm -f busca_e_conta bib_arqs.o busca_e_conta.o
