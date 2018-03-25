@@ -5,7 +5,6 @@
 
 int main(int argc, char **argv)
 {
-	FILE *fp;
 	char *conteudo = NULL;
 	/*
 	* Tamanho do arquivo em bytes, quantidade de vezes que o padrão

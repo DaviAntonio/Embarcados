@@ -1,11 +1,11 @@
-cat_falsificado: bib_arqs.o cat_falsificado.o
-	gcc -o cat_falsificado bib_arqs.o cat_falsificado.o
+cat_falsificado:  bib_arqs.o cat_falsificado.o
+	gcc $(CFLAGS) -o cat_falsificado bib_arqs.o cat_falsificado.o
+
+cat_falsificado.o: cat_falsificado.c bib_arqs.h
+	gcc $(CFLAGS) -c cat_falsificado.c
 
 bib_arqs.o: bib_arqs.c
-	gcc -c bib_arqs.c
-
-cat_falsificado.o: bib_arqs.h cat_falsificado.c
-	gcc -c cat_falsificado.c
+	gcc $(CFALGS) -c bib_arqs.c
 
 clean:
-	rm -f cat_falsificado bib_arqs.o cat_falsificado.o
+	rm -f cat_falsificado cat_falsificado.o bib_arqs.o
