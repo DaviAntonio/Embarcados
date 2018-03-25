@@ -2,12 +2,19 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <unistd.h>
+#include <fcntl.h>
+
 int main(void)
 {
-	FILE *fp;
+	int fd, i = 0;
 	unsigned int idade;
 	char nomep[128], nomearq[128];
 	char ext[] = ".txt";
+	char prnome[] = "Nome: ";
+	char pridade[] = "Idade: ";
+	char jmp = '\n';
+	char widade[16];
 
 	printf("Digite o seu nome: ");
 	scanf("%s", nomep);
@@ -15,20 +22,33 @@ int main(void)
 	printf("Digite a sua idade: ");
 	scanf("%d", &idade);
 
+	sprintf(widade, "%d anos", idade);
+
 	strcpy(nomearq, nomep);
 	strcat(nomearq, ext);
 
-	fp = fopen(nomearq, "w");
+	fd = open(nomearq, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
 
-	if (fp == NULL) {
+	if (fd == -1) {
 		printf("Erro ao abrir o arquivo '%s'\n", nomearq);
 		exit(-1);
 	}
 
-	fprintf(fp, "Nome: %s\n", nomep);
-	fprintf(fp, "Idade: %d\n", idade);
+	while (prnome[i] != '\0')
+		write(fd, &prnome[i++], 1);
 
-	fclose(fp);
+	for (i = 0; nomep[i]; i++)
+		write(fd, &nomep[i], 1);
+
+	for(i = 0, write(fd, &jmp, 1); pridade[i]; i++)
+		write(fd, &pridade[i], 1);
+
+	for(i = 0; widade[i]; i++)
+		write(fd, &widade[i], 1);
+
+	write(fd, &jmp, 1);
+
+	close(fd);
 
 	return 0;
 }

@@ -6,19 +6,24 @@
 
 int main(void)
 {
-	int fd;
+	int fd, i = 0;
 	char frase[] = "Ola mundo!";
 
-	fd = open("ola_mundo.txt", O_RDWR, O_CREAT);
+	/*
+	* Abrir arquivo para leitura e escrita. Criar se não existir.
+	* Criar com permissões para o usuário ler e escrever.
+	*/
+	fd = open("ola_mundo.txt", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
 	
-	if(fd = -1){
+	if(fd == -1){
 		puts("Erro ao criar o arquivo\n");
 		exit(-1);
 	}
 
-	fputs(frase, fp);
-
-	fclose(fp);
+	while(frase[i] != '\0')
+		write(fd, &frase[i++], 1);
+	
+	close(fd);
 
 	return 0;
 }

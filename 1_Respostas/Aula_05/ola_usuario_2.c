@@ -2,33 +2,42 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <unistd.h>
+#include <fcntl.h>
+
 int main(int argc, char **argv)
 {
-        FILE *fp;
-        unsigned int idade;
-        char nomearq[128];
-        char ext[] = ".txt";
+	int fd;
+	char nomearq[128];
+	char ext[] = ".txt";
+	char prnome[128] = "Nome: ";
+	char pridade[128] = "Idade: ";
+	char jmp = '\n';
 
 	if (argc < 2) {
 		printf("Uso: ./ola_usuario_2 nome idade\n");
 		exit(-1);
 	}
 
-        strcpy(nomearq, argv[1]);
-        strcat(nomearq, ext);
+	strcpy(nomearq, argv[1]);
+	strcat(nomearq, ext);
 
-	sscanf(argv[2], "%d", &idade);
+	strcat(prnome, argv[1]);
+	strcat(pridade, argv[2]);
 
-        fp = fopen(nomearq, "w");
+	fd = open(nomearq, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
 
-        if (fp == NULL) {
-                printf("Erro ao abrir o arquivo '%s'\n", nomearq);
-                exit(-2);
+        if (fd == -1) {
+		printf("Erro ao abrir o arquivo '%s'\n", nomearq);
+		exit(-2);
         }
 
-        fprintf(fp, "Nome: %s\n", argv[1]);
-        fprintf(fp, "Idade: %d\n", idade);
+	write(fd, prnome, strlen(prnome));
+	write(fd, &jmp, 1);
+	write(fd, pridade, strlen(pridade));
+	write(fd, &jmp, 1);
 
-        fclose(fp);
+        close(fd);
+
 	return 0;
 }
