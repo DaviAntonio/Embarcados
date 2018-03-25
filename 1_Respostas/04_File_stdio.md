@@ -2,7 +2,7 @@ Para todas as questões, utilize as funções da biblioteca `stdio.h` de leitura
 
 1. Crie um código em C para escrever "Ola mundo!" em um arquivo chamado 'ola_mundo.txt'.  
 `gcc questao_01.c -o questao_01`  
-`Resposta em questao_01.c`
+Resposta em `Aula_04/questao_01.c`.
 
 2. Crie um código em C que pergunta ao usuário seu nome e sua idade, e escreve este conteúdo em um arquivo com o seu nome e extensão '.txt'. Por exemplo, considerando que o código criado recebeu o nome de 'ola_usuario_1':
 
@@ -15,7 +15,7 @@ $ Nome: Eu
 $ Idade: 30 anos
 ```  
 `gcc ola_usuario_1.c -o ola_usuario_1`  
-`Resposta em ola_usuario_1.c`
+Resposta em `Aula_04/ola_usuario_1.c`.
 
 3. Crie um código em C que recebe o nome do usuário e e sua idade como argumentos de entrada (usando as variáveis `argc` e `*argv[]`), e escreve este conteúdo em um arquivo com o seu nome e extensão '.txt'. Por exemplo, considerando que o código criado recebeu o nome de 'ola_usuario_2':
 
@@ -26,7 +26,7 @@ $ Nome: Eu
 $ Idade: 30 anos
 ```  
 `gcc ola_usuario_2.c -o ola_usuario_2`  
-`Resposta em ola_usuario_2.c`
+Resposta em `Aula_04/ola_usuario_2.c`.
 
 4. Crie uma função que retorna o tamanho de um arquivo, usando o seguinte protótipo: `int tam_arq_texto(char *nome_arquivo);` Salve esta função em um arquivo separado chamado 'bib_arqs.c'. Salve o protótipo em um arquivo chamado 'bib_arqs.h'. Compile 'bib_arqs.c' para gerar o objeto 'bib_arqs.o'.  
 `gcc -c bib_arqs.c`
@@ -41,7 +41,7 @@ $ echo Ola mundo cruel! Ola universo ingrato! > ola.txt
 $ ./cat_falsificado ola.txt
 $ Ola mundo cruel! Ola universo ingrato!
 ```  
-Resposta em `cat_falsificado.c`. Binário obtido por `make -f  Makefile-q06`.
+Resposta em `Aula_04/cat_falsificado.c`. Binário obtido por `make -f  Makefile-q06`.
 
 7. Crie um código em C que conta a ocorrência de uma palavra-chave em um arquivo-texto, e escreve o resultado no terminal. Reaproveite as funções já criadas nas questões anteriores. Por exemplo, considerando que o código criado recebeu o nome de 'busca_e_conta':
 
@@ -50,4 +50,4 @@ $ echo Ola mundo cruel! Ola universo ingrato! > ola.txt
 $ ./busca_e_conta Ola ola.txt
 $ 'Ola' ocorre 2 vezes no arquivo 'ola.txt'.
 ```  
-Resposta em `busca_e_conta.c`. Binário obtido por `make -f Makefile-q07`.
+Resposta em `Aula_04/busca_e_conta.c`. Binário obtido por `make -f Makefile-q07`.
