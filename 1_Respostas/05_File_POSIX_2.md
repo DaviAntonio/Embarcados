@@ -2,6 +2,7 @@ Para todas as questões, utilize as funções da norma POSIX (`open()`, `close()
 
 1. Crie um código em C para escrever "Ola mundo!" em um arquivo chamado 'ola_mundo.txt'.  
 Resposta em `Aula_05/questao_01.c`.
+Linha de comando do `vi`: `make questao_01`.
 
 2. Crie um código em C que pergunta ao usuário seu nome e sua idade, e escreve este conteúdo em um arquivo com o seu nome e extensão '.txt'. Por exemplo, considerando que o código criado recebeu o nome de 'ola_usuario_1':
 
@@ -13,7 +14,8 @@ $ cat Eu.txt
 $ Nome: Eu
 $ Idade: 30 anos
 ```  
-Resposta em `Aula_05/ola_usuario.c`.
+Resposta em `Aula_05/ola_usuario_1.c`.
+Linha de comando do `vi`: `make ola_usuario_1`
 
 3. Crie um código em C que recebe o nome do usuário e e sua idade como argumentos de entrada (usando as variáveis `argc` e `*argv[]`), e escreve este conteúdo em um arquivo com o seu nome e extensão '.txt'. Por exemplo, considerando que o código criado recebeu o nome de 'ola_usuario_2':
 
@@ -24,6 +26,7 @@ $ Nome: Eu
 $ Idade: 30 anos
 ```  
 Resposta em `Aula_05/ola_usuario_2.c`.
+Linha de comando do `vi`: `make ola_usuario_2`.
 
 4. Crie uma função que retorna o tamanho de um arquivo, usando o seguinte protótipo: `int tam_arq_texto(char *nome_arquivo);` Salve esta função em um arquivo separado chamado 'bib_arqs.c'. Salve o protótipo em um arquivo chamado 'bib_arqs.h'. Compile 'bib_arqs.c' para gerar o objeto 'bib_arqs.o'.  
 Resposta em `Aula_05/bib_arqs.c` obtida por `gcc -c bib_arqs.c`.
