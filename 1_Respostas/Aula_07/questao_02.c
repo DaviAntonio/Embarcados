@@ -8,6 +8,13 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <signal.h>
+
+void recebe_sinal()
+{
+	//puts("SIGUSR1 recebido, acordar");
+	return;
+}
 
 void le_pipe(int fd)
 {
@@ -25,7 +32,6 @@ void le_pipe(int fd)
 	//puts("Fim de leitura");
 	puts(str);
 	//printf("Leitura: %s\n", str);
-	return;
 }
 
 
@@ -34,7 +40,7 @@ int main(void)
 {
 	/* Descritor do pipe */
 	int fd[2];
-
+	int pid;
 	/* Criar os pipes */
 	if (!pipe(fd)) {
 		puts("Pipe criado com sucesso\n");
@@ -43,50 +49,58 @@ int main(void)
 		exit(-1);
 	}
 
-	if (fork()) {
+	pid = fork();
+	if (pid) {
+		signal(SIGUSR1, recebe_sinal);
 	/* Processo pai */
 		char msg0[] = {"Não façais nada violento, praticai somente \
 aquilo que é justo e equilibrado."};
 		char msg1[] = {"Sim, mas é uma coisa difícil de ser praticada até mesmo por um velho como eu..."};
-		/* Tempo para filho escrever */
+		/* filho vai escrever */
 		//puts("0 - Pai vai ler");
 		le_pipe(fd[0]);
 
 		//puts("1 - Pai vai escrever");
 		write(fd[1], msg0, sizeof(msg0));
 		//puts("Pai terminou de escrever");
-		/* Tempo para filho ler */
-		sleep(1);
+		kill(pid, SIGUSR1);
+		/* mandou filho ler */
+		pause();
 		
 		//puts("2 - Pai vai ler");
 		le_pipe(fd[0]);
 
 		//puts("3 - Pai vai escrever");
 		write(fd[1], msg1, sizeof(msg1));
-		/* Tempo para filho ler */
-		sleep(1);
-		
+		//puts("Pai terminou de escrever");
+		/* mandar filho ler */
+		kill(pid, SIGUSR1);
+
 		wait(NULL);
+		puts("Filho terminou, retornar 0");
 	} else {
+		signal(SIGUSR1, recebe_sinal);
 	/* Processo filho */
 		char msg0[] = {"Pai, qual é a verdadeira essência da sabedoria?"};
 		char msg1[] = {"Mas até uma criança de três anos sabe disso!"};
-		sleep(1);
 		//puts("0 - Filho vai escrever");
 		write(fd[1], msg0, sizeof(msg0));
 		//puts("Filho terminou de escrever");
-		/* Tempo para pai ler */
-		sleep(1);
+		/* parar para pai ler */
+		pause();
 		
 		//puts("1 - Filho vai ler");
 		le_pipe(fd[0]);
 
 		//puts("2 - Filho vai escrever");
 		write(fd[1], msg1, sizeof(msg1));
-		/* Tempo para pai ler */
-		sleep(1);
+		//puts("Filho terminou de escrever");
+		/* mandar pai ler */
+		kill(getppid(), SIGUSR1);
+		pause();
 		//puts("3 - Filho vai ler");
 		le_pipe(fd[0]);
+		puts("Filho vai retornar 0");
 	}
 
 	return 0;
