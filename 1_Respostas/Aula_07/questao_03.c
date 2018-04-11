@@ -64,5 +64,6 @@ void le_pipe(int fd)
 	//puts("Fim de leitura");
 	puts(str);
 	//printf("Leitura: %s\n", str);
-	return;
+	free(str);
+	str = NULL;
 }
