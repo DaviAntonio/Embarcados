@@ -13,7 +13,7 @@ struct vect_sk{
 };
 
 void fill_vector_50k(long int *v);
-long int search_max(long int *v, int size);
+long int search_max(long int *v, int minpos, int maxpos);
 
 void *search_max_t(void *seek);
 
@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 		long int max_smax;
 		fill_vector_50k(v);
 		puts("Vetor inicializado");
-		max_smax = search_max(v, VSIZE);
+		max_smax = search_max(v, 0, VSIZE);
 		printf("O máximo por busca completa é: %ld\n", max_smax);
 	}
 	
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
 		tv[2] = s2.res;
 		tv[3] = s3.res;
 
-		max_t = search_max(tv, 4);
+		max_t = search_max(tv, 0, 4);
 
 		printf("Máximo por 4 threads é: %ld\n", max_t);
 	}
@@ -91,7 +91,7 @@ void fill_vector_50k(long int *v)
 		v[i] = random();
 }
 
-long int search_max(long int *v, int size)
+long int search_max(long int *v, int minpos, int maxpos)
 {
 	/*
 	* Os números do vetor são sempre positivos
@@ -99,7 +99,7 @@ long int search_max(long int *v, int size)
 	long int max = 0;
 	int i;
 
-	for (i = 0; i < size; i++)
+	for (i = minpos; i < maxpos; i++)
 		if (v[i] > max)
 			max = v[i];
 	return max;
@@ -108,6 +108,6 @@ long int search_max(long int *v, int size)
 void *search_max_t(void *seek)
 {
 	struct vect_sk *s = (struct vect_sk*) seek;
-	s->res = search_max(s->v, s->lim_sup - s->lim_inf);
+	s->res = search_max(s->v, s->lim_inf, s->lim_sup);
 	return NULL;
 }
