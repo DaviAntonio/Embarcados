@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "prog_defs.h"
+#include "gpio_sysfs.h"
 
 void init_camera()
 {
@@ -42,4 +43,10 @@ void dc_camera()
 	puts("Disconectando câmera");
 	system(CMD_DISCONNECT_CAMERA);
 	puts("Câmera desconectada");
+}
+
+void read_continue(int pin){
+	if(setGPIO_In(pin,"rising"))
+		puts("Erro na leitura do botão...\n");
+	GPIO_Read(pin);
 }
