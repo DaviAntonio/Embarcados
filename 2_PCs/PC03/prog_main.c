@@ -12,16 +12,17 @@ int main(void)
 Raspberry Pi");
 	puts("Favor posicionar a câmera alinhada com a página desejada e com a \
 objetiva voltada para cima");
+	read_continue(21, 1);
 	//puts("Pressione ENTER quando pronto");
 	//scanf("%c", &c);
 	//Ler botão se quer continuar
-	read_continue(21);
+	read_continue(21, 2);
 
 	/* Inicializar chdk, câmera deve estar preparada */
 	init_camera();
 
 	puts("A foto será capturada");
-	read_continue(21);
+	read_continue(21, 2);
 
 	/* Tirar foto e corrigir orientação */
 	take_photo();
@@ -34,6 +35,7 @@ objetiva voltada para cima");
 
 	/* Disconectar a câmera */
 	dc_camera();
+	read_continue(21, 3);
 
 	return 0;
 }

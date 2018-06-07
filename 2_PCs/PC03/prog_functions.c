@@ -45,8 +45,13 @@ void dc_camera()
 	puts("Câmera desconectada");
 }
 
-void read_continue(int pin){
-	if(setGPIO_In(pin,"rising"))
-		puts("Erro na leitura do botão...\n");
-	GPIO_Read(pin);
+void read_continue(int pin, int option){
+	if (option == 1) { // setar
+		if(setGPIO_In(pin,"rising"))
+			puts("Erro na leitura do botão...\n");
+	} else if (option == 2) { // ler
+		GPIO_Read(pin);
+	} else {
+		unsetGPIO(pin);
+	}
 }
